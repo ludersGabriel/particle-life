@@ -21,14 +21,14 @@ const canvas = document.getElementById('board');
 const ctx = canvas.getContext('2d');
 
 const n = 1000;
-const dt = 0.02;
-const frictionHalfLife = 0.060;
+const dt = 0.009;
+const frictionHalfLife = 0.040;
 const rMax = 0.1;
-const m = 10;
+const m = 4;
 const matrix = makeRandomMatrix();
 
 const frictionFactor = Math.pow(0.5, dt / frictionHalfLife);
-const forceFactor = 5;
+const forceFactor = 10;
 
 function makeRandomMatrix(){
   const rows = [];
@@ -69,8 +69,12 @@ function updateParticles(){
     for(let j = 0; j < n; j++){
       if(j === i) continue;
 
-      const rX = positionsX[j] - positionsX[i];
-      const rY = positionsY[j] - positionsY[i];
+      let rX = positionsX[j] - positionsX[i];
+      let rY = positionsY[j] - positionsY[i];
+
+      rX -= Math.round(rX);
+      rY -= Math.round(rY);
+
       const r = Math.hypot(rX, rY);
 
       if(r > 0 && r < rMax){
