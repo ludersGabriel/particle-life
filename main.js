@@ -10,7 +10,7 @@ function force(r, a) {
     return r / beta - 1;
   }
   
-  if(beta < r && r < 1){
+  if(r < 1){
     return a * (1 - Math.abs(2 * r - 1 - beta) / (1 - beta));
   }
 
@@ -24,7 +24,7 @@ const n = 1000;
 const dt = 0.009;
 const frictionHalfLife = 0.040;
 const rMax = 0.1;
-const m = 4;
+const m = 10;
 const matrix = makeRandomMatrix();
 
 const frictionFactor = Math.pow(0.5, dt / frictionHalfLife);
